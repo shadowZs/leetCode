@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>无重复字符的最大字符串</title>
+</head>
+<body>
+	
+</body>
+</html>
+<script>
+	/*
+		给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度
+		方法：
+			1.暴力遍历
+
+	*/
+	let s = "aabaab!bb";
+
+
+	// 暴力遍历，设定好开始位置，确认开始到结束位置是否有重复项，若有重复项则对比此时的最大值
+	let lengthOfLongestSubstring = function(s) {
+    	let result = s[0];
+    	if(s.length === 0) return '';
+    	for(let i=0; i<s.length-1; i++){
+    		let temp = s[i];
+    		for(let j=i+1; j<s.length; ){
+    			if(temp.indexOf(s[j]) === -1){
+    				temp+=s[j];
+    				j++;
+    			}else{
+    				break;
+    			}
+    		}
+
+    		if(result.length < temp.length){
+				result = temp;
+			}
+    	}
+
+    	return result.length
+
+	};
+
+	// 滑动窗口
+	// 对遍历法的优化，遍历法是设定起始位置后以此比较是否有重复项，遇到重复项i++;此方法是借助[]临时保存不重复项，遇到重复项shift()，与遍历效果一致
+	let lengthOfLongestSubstring2 = function(s){
+		let len = s.length;
+		let res = 0;      // 用来保存最大值
+		let temp = [];
+		for(let i=0; i<len; ){
+			if(temp.indexOf(s[i]) === -1){
+				temp.push(s[i]);
+				i++
+			}else{
+				temp.shift();
+				continue;
+			}
+
+			res = Math.max(res, temp.length);
+		}
+
+		return res;
+
+	}
+
+
+	// 滑块移动，对滑块窗口的改进，只对不重复的项进行比较
+	let lengthOfLongestSubstring3 = function(s){
+		let res=0,m='';
+
+		for(let n of s){
+			if(m.indexOf(n) === -1){
+				m+=n;
+				res = Math.max(res, m.length);   
+			}else{
+				m = m.slice(m.indexOf(n)+1);   
+				m+=n;				
+			}
+		}
+		
+
+		return res;
+	}
+
+
+	let result = lengthOfLongestSubstring3(s);
+	console.log('result:', result);
+</script>
