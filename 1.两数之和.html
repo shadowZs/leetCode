@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>leetcode 1 两数之和</title>
+</head>
+<body>
+	
+</body>
+</html>
+<script>
+	/*
+		给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。 https://leetcode-cn.com/problems/two-sum/
+		你可以假设每种输入只会对应一个答案。但是，你不能重复利用这个数组中同样的元素。
+
+		实现：
+		1.暴力遍历
+		2.hash
+	*/
+
+	
+	let nums = [2,7,11,15]
+	let target = 9;
+
+	// 暴力遍历
+	let twoSum1 = function(nums, target){
+		for(let i=0; i<nums.length-1; i++){
+			for(let j=i+1; j<nums.length; j++){
+				if(nums[i] + nums[j] === target){
+					return [i, j]
+				}
+			}
+		}
+	}
+
+	// 暴力遍历优化，遍历确认差值后，lastIndexOf来判断是否存在
+	let twoSum2 = function(nums, target){
+		for(let i=0; i<nums.length-1; i++){
+			let temp = target - nums[i];
+			let index = nums.lastIndexOf(temp)
+			if(index !== -1 && index !== i){
+				return [i, index]
+			}
+
+		}
+	}
+
+
+	// hash 
+	let twoSum3 = function(nums, target){
+		let hash = {};
+		for(let i=0; i<nums.length; i++){
+			let temp = nums[i];
+			if(hash[temp] !== undefined){
+				console.log(111);
+				return [hash[temp], i]
+			}else{
+				hash[target-temp] = i
+			}
+		}
+	}
+
+	let s = twoSum2(nums, target);
+	console.log(s)
+
+</script>
