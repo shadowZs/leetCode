@@ -11,50 +11,63 @@
 <script>
 	/*
 		给定一个字符串 s，找到 s 中最长的回文子串。你可以假设 s 的最大长度为 1000。
+
+		解题：
+			1.快速方法：回文逆序应该为自己，将整个字符串逆序，找出相等的部分，再验证是否为回文
+			2.暴力遍历： 依次遍历判断是否为回文
+			3.动态规划，如果aa是回文，再判断左右是否相同
+			4.中心扩展
 	
 	*/
-	let s = '"tattarrattat"';
+	let s = 'aaaa';
 
-	// let longestPalindrome = function(s){
-		
+	// 快速解题, 逆序找出公共的字符串
+	let longestPalindrome1 = function(s){
 	
-
-	// }
-
-	// 由于回文是对称结构，选取一个奇点，判断左右是否一致
-	let longestPalindrome = function(s){
-		if(s.length === 0) return  '';
-		let max = s[0];
-		for(let i=0; i<s.length; i++){
-			let left=i;
-			let right=i;	
-			let result = '';	
-			while(right < s.length && left >= 0){
-			
-				if(s[left-1] === s[i] && ){
-					left--;
-		
-				}else if(s[right+1] === s[i]){
-					right++;
-			
-				}else if(s[left-1] === s[right+1] && i-left === right-i){
-					left--;
-					right++;
-				}else{
-		
-					break;
-				}
-
-			}
-			console.log(i, left, right);
-			
-			result = s.slice(left<0?0:left, right);
-			max = max.length > result.length ? max: result;
-		}
-
-		return max;
 	}
 
-	let results = longestPalindrome(s);
+
+	// 中心扩展法, 以每个点为中心依次两边扩展，判断扩展后的是否为回文
+	// 本质与动态规划一致
+	let longestPalindrome2 = function(s){
+		
+	}
+
+	// 动态规划 先找出s中的aa或者aba回文再对回文进行动态规划，判断前后是否一致
+	let longestPalindrome3 = function(s){
+		if(s.length === 0) return '';
+		let result = s[0]
+		for(let i=0; i<s.length-1; i++){
+			let ss = s[i]
+			let ss1 = '';
+			let ss2 = '';
+			if(s[i] === s[i+1]){
+				ss1 = expendStr(s,i,i+1)
+			}
+
+			if(s[i+1] === s[i-1]){
+				ss2 = expendStr(s,i-1, i+1);
+			}
+
+			ss = ss2 > ss1 ? ss2 : ss1;
+
+			result = ss.length > result.length ? ss : result
+
+		}
+
+		return result;
+
+		function expendStr(s,start,end){
+			let l=start,r=end;
+			if(r !== l && s[l] !== s[r]) return s[l]; 
+			while(l-1>=0 && r+1<s.length && s[l-1]===s[r+1]){
+				l--;
+				r++;
+			}
+			return s.substring(l,r+1);
+		}
+	}
+
+	let results = longestPalindrome2(s);
 	console.log('max:', results);	
 </script>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>整数反转</title>
+</head>
+<body>
+	
+</body>
+</html>
+<script>
+	/*
+		给出一个 32 位的有符号整数，你需要将这个整数中每位上的数字进行反转。
+		假设我们的环境只能存储得下 32 位的有符号整数，则其数值范围为 [−231,  231 − 1]。请根据这个假设，如果反转后整数溢出那么就返回 0。
+		解题：js中整数超过21会进行科学计数法转换 
+	*/
+
+	let revert = function(x){
+		if(x === 0 ) return 0;
+		if(x > Math.pow(2,31) || x <-Math.pow(2,31)) return 0;
+		let f = x > 0 ? true : false;
+		let str = f ? String(x) : String(-x); 
+		let revertNum = Number(str.split('').reverse().join('')); 
+		if(revertNum > Math.pow(2,31) || revertNum < -Math.pow(Math.pow(2,-31))) {return 0};
+		if(f) return revertNum;
+		else return -revertNum;
+	}
+
+	let s = revert(-123456);
+	console.log(s)
+</script>
