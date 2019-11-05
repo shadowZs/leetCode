@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>盛最多水的容器</title>
+</head>
+<body>
+	
+</body>
+</html>
+<script>
+	/*
+		给定 n 个非负整数 a1，a2，...，an，每个数代表坐标中的一个点 (i, ai) 。在坐标内画 n 条垂直线，垂直线 i 的两个端点分别为 (i, ai) 和 (i, 0)。找出其中的两条线，使得它们与 x 轴共同构成的容器可以容纳最多的水。
+		说明：你不能倾斜容器，且 n 的值至少为 2。
+		图中垂直线代表输入数组 [1,8,6,2,5,4,8,3,7]。在此情况下，容器能够容纳水（表示为蓝色部分）的最大值为 49。
+		来源：力扣（LeetCode）
+		链接：https://leetcode-cn.com/problems/container-with-most-water
+		
+		解题：即要找到height*(index2-index1)最大值：
+			1. 暴力遍历
+			2. 双指针： 面积的长度只有最短的那根确认，移动最短的那根棒子，找出最优解
+	
+	*/
+
+
+	// 暴力遍历，找出起点和重点，对比找出最大值
+	let height = [1,8,6,2,5,4,8,3,7]; 
+	let maxArea = function(height){
+		if(height.length <=1) return 0;
+		let max=0;
+
+		for(let i=0; i<height.length-1; i++){
+			for(let j=i+1; j<height.length; j++){
+				let area = Math.min(height[i], height[j]) * (j-i);
+				max = Math.max(max, area)
+			}
+		}
+
+		return max
+	}
+
+	// 双指针，移动最小长度的棍子，找出max
+	let maxArea1 = function(height){
+		if(height.length <= 1) return 0;
+		let max = 0;
+		let l = 0, r = height.length-1;
+		while(l<r){
+			max = Math.max(max, Math.min(height[r], height[l]) * (r-l));
+			if(height[l] < height[r]){
+				l++
+			}else{
+				r--
+			}
+		}
+
+		return max;
+	}	
+	
+
+	let result = maxArea1(height);
+	console.log(result);
+</script>
