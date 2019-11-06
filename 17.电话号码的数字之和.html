@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>17.电话号码的数字之和</title>
+</head>
+<body>
+	
+</body>
+</html>
+<script>
+	/*
+		给定一个仅包含数字 2-9 的字符串，返回所有它能表示的字母组合。
+		给出数字到字母的映射如下（与电话按键相同）。注意 1 不对应任何字母。
+		解析：
+			1.递归--> 下一层的数据都是由上一层数据确认，确认第一级后再计算除下一级的数据
+
+	*/
+
+	// 递归法
+
+	let letterCombinations = function(digits){
+	
+		if(!digits) return [];
+		let result = [];
+		let hash = {
+			'1': '',
+			'2': 'abc',
+			'3': 'def',
+			'4': 'ghi',
+			'5': 'jkl',
+			'6': 'mno',
+			'7': 'pqrs',
+			'8': 'tuv',
+			'9': 'wxyz'
+		}
+
+		let resultArr = [];
+		let digitsStr = String(digits);
+		for(let i=0; i<digitsStr.length; i++){
+			let arr = [];
+			if(i == 0) arr=hash[digitsStr[0]].split('');
+			else{
+				arr = joinStr(resultArr[i-1], hash[digitsStr[i]])
+			}
+
+			resultArr.push(arr);
+		}
+
+		return resultArr[digitsStr.length - 1]
+
+		function joinStr(preArr, current){
+			let result = [];
+			preArr.forEach(item => {
+				for(let i=0; i< current.length; i++){
+					result.push(`${item}${current[i]}`)
+				}
+			})
+
+			return result;
+		}
+	}
+
+
+</script>
