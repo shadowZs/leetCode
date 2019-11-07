@@ -32,6 +32,7 @@
 	*/
 	let nums = [-3,-2,-1,0,0,1,2,3], target = 0;
 
+	// 双指针
 	let fourSum = function(nums, target){	
 		nums.sort((a,b) => a-b);
 		let result = [];
@@ -76,6 +77,7 @@
 	}
 
 
+	// hash
 	let fourSum1 = function(nums, target){
 		let result = [];
 		nums.sort((a,b) => a-b);
@@ -90,10 +92,10 @@
 					let temp = nums[i] + nums[j] + nums[k];
 					let diff =  target - temp;
 
-					console.log(hash, diff, temp)
+					console.log(hash, diff, temp, hash)
 					if(hash[temp]){
 						if(hash[temp] !== 2){
-							result.push([nums[i], nums[j], nums[k], temp])
+							result.push([nums[i], nums[j], nums[k], diff])
 							hash[temp] = 2;
 						}
 						

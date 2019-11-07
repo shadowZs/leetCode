@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>27.移除元素</title>
+</head>
+<body>
+	
+</body>
+</html>
+<script>
+	/*
+		给定一个数组 nums 和一个值 val，你需要原地移除所有数值等于 val 的元素，返回移除后数组的新长度。
+
+		不要使用额外的数组空间，你必须在原地修改输入数组并在使用 O(1) 额外空间的条件下完成。
+
+		元素的顺序可以改变。你不需要考虑数组中超出新长度后面的元素。
+
+		来源：力扣（LeetCode）
+		链接：https://leetcode-cn.com/problems/remove-element
+
+		解析： 与26方法类似
+	*/
+
+
+	let nums = [3,2,2,3,3], val = 3;
+
+	// 1.普通遍历
+	let removeElement = function(nums, val){
+		for(let i=0; i<nums.length;){
+			if(nums[i] === val){
+				nums.splice(i, 1)
+			}else{
+				i++
+			}
+
+		}
+
+		return nums.length;
+	}
+
+
+	// 2.借助额外空间来保存非val的个数
+	let removeElement1 = function(nums, val){
+		let num = 0;
+		let len = nums.length;
+		for(let i=0; i< len; i++){
+			if(nums[num] === val){
+				nums.splice(num, 1)	
+			}else{
+				num ++;
+			}
+		}
+
+		return nums.length;
+	}
+
+
+	let s = removeElement1(nums, val);
+	console.log(s, nums)
+</script>

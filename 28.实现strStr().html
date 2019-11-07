@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>实现strStr()</title>
+</head>
+<body>
+	
+</body>
+</html>
+<script>
+	/*
+	实现 strStr() 函数。
+
+	给定一个 haystack 字符串和一个 needle 字符串，在 haystack 字符串中找出 needle 字符串出现的第一个位置 (从0开始)。如果不存在，则返回  -1。
+
+	来源：力扣（LeetCode）
+	链接：https://leetcode-cn.com/problems/implement-strstr
+	
+	解析： 此题就是实现 indexOf
+		  1.直接用indexOf达到效果
+		  2.暴力遍历	
+
+	*/
+
+	let haystack = "mississippi", needle = "issip";
+	let strStr = function(haystack, needle){
+		return haystack.indexOf(needle);
+	}
+
+
+	// 遍历匹配首词是否相同，若相同再截取needle相等长度的字符串
+	let strStr1 = function(haystack, needle){
+		if(needle === '') return 0;
+		for(let i=0; i<haystack.length; i++){
+			if(haystack[i] !== needle[0]) continue;
+			let newStr = haystack.substr(i, needle.length);
+			if(newStr === needle) return i;
+		
+		}
+
+		return -1;
+
+	}
+
+	
+
+	let result = strStr1(haystack, needle);
+	console.log(result);
+</script>

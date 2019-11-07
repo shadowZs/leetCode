@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>括号的生成</title>
+</head>
+<body>
+	
+</body>
+</html>
+<script>
+	/*
+		给出 n 代表生成括号的对数，请你写出一个函数，使其能够生成所有可能的并且有效的括号组合。
+		例如，给出 n = 3，生成结果为：
+
+		[
+		  "((()))",
+		  "(()())",
+		  "(())()",
+		  "()(())",
+		  "()()()"
+		]
+
+		来源：力扣（LeetCode）
+		链接：https://leetcode-cn.com/problems/generate-parentheses
+
+		解析： 1.动态规划：找出规律 n的结果都是由n-1的结果生成的
+			  2.回溯：如果完成一个事情需要n个步骤，可以用回溯完成
+
+	*/
+	// 	动态规划
+	let generateParenthesis = function(n){
+		if(n === 1) return '()';
+		let arr = [['()']];
+		for(let i=1; i<n; i++){
+			let an = [];
+			for(let j=0; j<arr[i-1].length; j++){
+				// 公用的几种布局方式： 放在外层，左边，右边，展开包裹
+				// 特殊的几种方式：放在里面(不展开)---> ()/)( 位置确认
+
+				let temp = arr[i-1][j];
+				if(an.indexOf(`${temp}()`) === -1) an.push(`${temp}()`);
+				if(an.indexOf(`()${temp}`) === -1) an.push(`()${temp}`);
+				if(an.indexOf(`(${temp})`) === -1) an.push(`(${temp})`);
+
+				for(let k=1; k<temp.length-1; k++){
+					if((temp[k] === '(' && temp[k+1] === ')') || temp[k] === ')' && temp[k+1] === '('){
+						let newStr = temp.slice(0,k+1) + '()' + temp.slice(k+1); 
+						if(an.indexOf(newStr) === -1) an.push(newStr);
+						
+					}
+				}
+
+			}
+
+			arr.push(an)
+		}
+
+		return arr[arr.length-1]	
+	}
+
+
+	// 回溯法：依次遍历判断
+	let generateParenthesis1 = function(n){
+		let result = [];
+		let str = '(';  // str总长度是n*2; 必须以(开始，左侧(数量必须大于)
+
+		for(let i=0; i<n*2; i++){
+
+		}	
+	}
+
+	let result = generateParenthesis(2);
+	console.log(result)
+</script>

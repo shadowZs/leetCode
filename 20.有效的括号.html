@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>有效的括号</title>
+</head>
+<body>
+	
+</body>
+</html>
+<script>
+	/*
+		给定一个只包括 '('，')'，'{'，'}'，'['，']' 的字符串，判断字符串是否有效。
+
+		有效字符串需满足：
+
+		左括号必须用相同类型的右括号闭合。
+		左括号必须以正确的顺序闭合。
+		注意空字符串可被认为是有效字符串。
+
+		来源：力扣（LeetCode）
+		链接：https://leetcode-cn.com/problems/valid-parentheses
+
+		解析： 有效的括号一定是一种对称结构，例如： {()} (){} {()}{}，类似于剥洋葱的，先进的一定是([{，后出的一定是)]}
+
+	*/
+
+	// 利用对称关系，用数组保存s遍历的各项，遇到hash key push 进数组，遇到hash value，再确认hash value 和key是否对应 --->辅助栈法
+	let s = '{()}{}]';
+	let isValid = function(s){
+		let hash = {
+			'{': '}',
+			'[': ']',
+			'(': ')'
+		}
+
+		let arr = [];
+		let keys = Object.keys(hash)
+		for(let i=0; i<s.length; i++){
+			let temp = s[i]
+			if(keys.indexOf(temp) !== -1){
+				arr.push(temp)
+			}else{
+				let lastIndex = arr.length-1;
+				if(hash[arr[lastIndex]] === temp){
+					arr.splice(lastIndex, 1)
+				}else{
+					return false;
+				}
+			}
+		}
+
+		if(arr.length === 0) return true;
+		else return false;
+
+	}
+
+	let isValid1 = function(){
+		let hash = {
+			'{': '}',
+			'[': ']',
+			'(': ')'
+		}
+	}
+
+	let result = isValid(s);
+	console.log(result);
+</script>
