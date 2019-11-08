@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>计算两数组的交集</title>
+</head>
+<body>
+	
+</body>
+</html>
+<script>
+	/*
+		例如：给定 nums1 = [1, 2, 2, 1]，nums2 = [2, 2]，返回 [2, 2]。
+	*/
+
+
+	// 方案1: 先排序后遍历
+	let nums1 = [1,2,3,3,4];	
+	let nums2 = [1,1,1,1,3];
+	// if(nums1.length === 0 || nums2.length === 0){
+	// 	return [];
+	// } 
+	let repeatNum = function(nums1, nums2){
+		nums1.sort((a,b) => a-b);
+		nums2.sort((a,b) => a-b);
+		let result = [];
+
+		for(let i=0; i<nums1.length; i++){
+
+			for(let j=0; j<nums2.length; j++){
+				if(nums1[i] > nums2[j]) continue;
+				if(nums1[i] < nums2[j]) break;
+				if(nums1[i] === nums2[j]){
+					result.push(nums1[i]);
+					nums2.splice(j,1);
+					j--
+					break;
+				}
+			}
+		}
+
+		return result;
+	}
+
+
+	// es6 filter + some
+	let repeatNum1 = function(nums1, nums2){
+		return nums1.filter(item1 => {
+			return nums2.some((item2,i) => {
+				item1 === item2 ? (nums2.splice(i, 1)) : '';
+				return item1 === item2;
+			})
+		})
+	}
+
+
+	// Hash 方法
+	let repeatNum2 = function(nums1, num2){
+		let result = [];
+		let hash = {};
+		for(let i=0; i<nums1.length; i++){
+			let temp = nums1[i]
+			if(hash[temp]){
+				hash[temp]++;
+			}else{
+				hash[temp] = 1
+			}
+		}
+
+		console.log(hash);
+		for(let j=0; j<nums2.length; j++){
+			let temp = nums2[j];
+			if(hash[temp]){
+				hash[temp] --;
+				result.push(temp)
+			}
+		}
+
+		return result;
+
+	}
+
+	// 
+
+
+	let result = repeatNum2(nums1, nums2);
+	console.log(result);
+
+
+</script>

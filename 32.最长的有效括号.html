@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>最长的有效括号</title>
+</head>
+<body>
+	
+</body>
+</html>
+<script>
+	/*
+		给定一个只包含 '(' 和 ')' 的字符串，找出最长的包含有效括号的子串的长度。
+
+		示例 1:
+
+		输入: "(()"
+		输出: 2
+		解释: 最长有效括号子串为 "()"
+
+		来源：力扣（LeetCode）
+		链接：https://leetcode-cn.com/problems/longest-valid-parentheses
+
+	*/
+
+	let s = ')()())';
+
+	//  超出时间限制
+	let longestValidParentheses = function(s){
+		if(s.length < 2) return 0;
+		let result = '';
+		for(let i=0; i<s.length; i++){
+			for(let j=s.length-1; j>i; j--){
+				let subStr = s.substring(i, j+1); 
+				if(result.length > j- i + 1) break;
+				if(checkValid(subStr)){		
+					if(result.length < subStr.length){
+						result = subStr;
+					}
+					break;
+				}
+			}
+		}
+
+		return result.length;
+
+
+		// 判断是否为有效括号
+		function checkValid(str){
+			let arr = []; 	
+			for(let i=0; i<str.length; i++){
+				let temp = str[i];
+				if(temp === '('){
+					arr.push(temp)
+				}else{
+					let pop = arr.pop();
+					if(pop === undefined) return false;
+				}
+			}
+
+
+			if(arr.length === 0) return true;
+			else return false;
+
+		}
+
+
+
+	}
+
+	let result = longestValidParentheses(s);
+	console.log(result);
+</script>
