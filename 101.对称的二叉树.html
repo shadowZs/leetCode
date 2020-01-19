@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>101.对称的二叉树</title>
+</head>
+<body>
+	
+</body>
+</html>
+<script>
+	/*
+		给定一个二叉树，检查它是否是镜像对称的。
+		例如，二叉树 [1,2,2,3,4,4,3] 是对称的。
+		解析： 二叉树的结构为2 n次幂，第一行是1， 第二行是2，第三行是4
+	*/
+
+	let root = [1,2,2,null,3,null,3];
+	let solution = function(root){
+		let index = 0;
+		let startIndex = 0;
+
+		while(Math.pow(2, index) <= root.length){
+			let splitLen = Math.pow(2, index);
+			let splitRoot = root.slice(startIndex, startIndex + splitLen); 
+
+			let bool = splitRoot.every((item, i) => {
+				return item === splitRoot[splitLen - 1 - i]
+			})
+
+			if(bool){
+				index++;
+				startIndex += splitLen
+			}else{
+				return false
+			}
+	
+		}
+
+		return true;	
+	}
+
+	let s = solution(root);
+	console.log('s:', s);
+</script>

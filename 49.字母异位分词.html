@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>49.字母异位分词</title>
+</head>
+<body>
+	
+</body>
+</html>
+<script>
+	/*
+		给定一个字符串数组，将字母异位词组合在一起。字母异位词指字母相同，但排列不同的字符串。
+
+		示例:
+
+		输入: ["eat", "tea", "tan", "ate", "nat", "bat"],
+		输出:
+		[
+		  ["ate","eat","tea"],
+		  ["nat","tan"],
+		  ["bat"]
+		]
+
+		来源：力扣（LeetCode）
+		链接：https://leetcode-cn.com/problems/group-anagrams
+		著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+
+	*/
+
+	/*扩展：判断对象为空的方法：
+	       1.Object.keys length =0 
+	       2.JSON.stringify(data) === '{}'
+	       3.for in 遍历	
+		
+	*/
+
+
+
+
+	let strs = ["eat", "tea", "tan", "ate", "nat", "bat"];
+
+
+	// 计算每个元素的字符是否相同
+	let solution = function(strs){
+		
+
+	}
+
+	// 获取一个字符串的所有异位,递归
+
+
+
+	function t(s, target){
+		let result = [];
+		for(let i=0; i<= s.length; i++){
+			let temp = s[i];
+			if(target === temp) continue;
+			else{
+				console.log(s.substring(0,i), s.substring(i))
+				result.push(`${s.substring(0,i)}${target}${s.substring(i)}`)
+			}
+		}
+		return result;
+	}
+
+
+	let s = getAll('eat');
+	console.log(s);
+</script>

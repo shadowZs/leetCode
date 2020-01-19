@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>缺失的正整数</title>
+</head>
+<body>
+	
+</body>
+</html>
+<script>
+	/*
+		给定一个未排序的整数数组，找出其中没有出现的最小的正整数。
+		示例 1:
+
+		输入: [1,2,0]
+		输出: 3
+
+		解析：1.最小的正整数是1，若数组中没有1,返回1
+			 2.对数组进行排序，找到满足i >0 && i-1<0 的数字的位置，若i>1,继续找下一个	
+	*/
+
+
+
+	//1. 最直接方法：通过index值来判断nums中是否存在
+	let nums = [1,2,0, ];
+	let firstMissingPositive = function(nums){
+		let min = 1;
+		while(nums.indexOf(min) !== -1){
+			min++
+		}
+
+		return min;	
+	
+	}
+
+
+	// 2.排序后对比，耗时比较久
+	let solution = function(nums){
+		nums.sort((a,b) => a-b);
+
+		let min = 0;
+		for(let i=0; i<nums.length; i++){
+			if(nums[i] < 0) continue;
+			if(nums[i] > 0){
+				if(nums[i] !== nums[i-1]){
+					min ++;
+					if(min === nums[i]) continue;
+					else return min;
+				}
+
+				if(nums[i] === nums[i-1] && i > 0) continue;
+			}
+
+		}
+
+		return min + 1;
+	}
+
+
+
+
+	let s = solution(nums);
+	console.log(s);
+</script>

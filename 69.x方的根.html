@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>69.x方的根---二分查找</title>
+</head>
+<body>
+	
+</body>
+</html>
+<script>
+	/*
+	实现 int sqrt(int x) 函数。
+	计算并返回 x 的平方根，其中 x 是非负整数。
+	由于返回类型是整数，结果只保留整数的部分，小数部分将被舍去。
+	来源：力扣（LeetCode）
+	链接：https://leetcode-cn.com/problems/sqrtx
+
+	*/
+
+	// Math.sqrt 求根运算
+	let x = 4;
+	let mySqrt = function(x){
+		return ~~Math.sqrt(x)
+	}
+
+	// 二分查找
+
+	let mySqrt1 = function(x){
+		if(x === 0) return 0;
+		let l=0, r=n-1,res,
+		while(l<=r){
+			let mid = (l+r)/2;
+			if()
+		}
+	}
+
+	let mySqrt2 = function(x){
+		let res = 0;
+		if(!(res*res <= x && (res+1)*(res+1)>x)){
+			res++
+		}	
+
+		return res;
+
+	}
+
+
+	let s = mySqrt2(x);
+	console.log(s);
+</script>
